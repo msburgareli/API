@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\GameController;
-use App\Http\Controllers\TournamentController;
-use App\Http\Controllers\UserController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\GameController;
+use App\Http\Controllers\Api\TournamentController;
+use App\Http\Controllers\Api\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +19,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/createTournament', [TournamentController::class, 'store'] );
+Route::group(['api' => 'app\Http\Controllers\Api'], function(){
+    Route::apiResource('tournament', TournamentController::class);
 
-Route::post('/registerGame', [GameController::class, 'store']);
+    Route::apiResource('game', GameController::class);
 
-Route::post('/register', [UserController::class, 'store']);
+    Route::apiResource('users', UserController::class);
+});
 
-Route::post('/joinTournament', [TournamentController::class, 'update']);
-
-Route::get('/ranking', [TournamentController::class, 'show']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['middleware' => 'isAdmin'], function(){
+
 });
