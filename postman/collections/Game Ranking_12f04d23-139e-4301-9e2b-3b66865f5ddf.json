@@ -95,7 +95,7 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:8000/api/users/{id}",
+							"raw": "localhost:8000/api/users/1",
 							"host": [
 								"localhost"
 							],
@@ -103,7 +103,7 @@
 							"path": [
 								"api",
 								"users",
-								"{id}"
+								"1"
 							]
 						}
 					},
@@ -134,7 +134,7 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:8000/api/users/{id}?name={name}&email={email}",
+							"raw": "localhost:8000/api/users/1?name=Teste Id 1&email=teste@id1.com",
 							"host": [
 								"localhost"
 							],
@@ -142,16 +142,16 @@
 							"path": [
 								"api",
 								"users",
-								"{id}"
+								"1"
 							],
 							"query": [
 								{
 									"key": "name",
-									"value": "{name}"
+									"value": "Teste Id 1"
 								},
 								{
 									"key": "email",
-									"value": "{email}"
+									"value": "teste@id1.com"
 								}
 							]
 						}
@@ -168,7 +168,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/users/{id}",
+							"raw": "localhost:8000/api/users/1",
 							"host": [
 								"localhost"
 							],
@@ -176,7 +176,7 @@
 							"path": [
 								"api",
 								"users",
-								"{id}"
+								"1"
 							]
 						}
 					},
@@ -184,6 +184,353 @@
 				}
 			],
 			"id": "420d1ebe-a628-411a-879a-00f88c6f1b69"
+		},
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "Get Games",
+					"id": "57e7010f-5741-4752-b0e4-d666dd8be965",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/game",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"game"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Game",
+					"id": "b338fd17-b925-4f56-9200-e2a86c4f15f4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "League of Legends",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/game",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"game"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Game",
+					"id": "19bfa822-138c-44ad-a4f2-4f87e50cf80b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/game/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"game",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Game",
+					"id": "f876bba7-6f86-4498-b584-aaf4c47116dd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Pedro",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "pedro@teste.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/game/1?name=Counter Strike 1.6",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"game",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Counter Strike 1.6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Game",
+					"id": "3ec80e8d-ffb2-47d5-8265-30c1b6fe4f0c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/game/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"game",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "7a8c5c8d-e9ae-4e4d-9c35-929fce49edbe"
+		},
+		{
+			"name": "Tournament",
+			"item": [
+				{
+					"name": "Get Tournaments",
+					"id": "c90de560-0862-4a6e-a155-15e107246cd1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/tournament",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Tournament",
+					"id": "c670f30d-9a3d-44dc-81b0-158a73bc2cdc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "League of Legends Tournament 2022",
+									"type": "text"
+								},
+								{
+									"key": "game_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "started_at",
+									"value": "2022-05-22",
+									"type": "text"
+								},
+								{
+									"key": "ended_at",
+									"value": "2022-05-23",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/tournament",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Tournament",
+					"id": "18bc0a67-c564-4ddf-a64e-cd1db084c081",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/tournament/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tournament",
+					"id": "ceb259ff-6b53-43b1-9b68-b948f2db1ca0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Pedro",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "pedro@teste.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/tournament/1?name=Counter Strike 1.6 Championship 2022",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Counter Strike 1.6 Championship 2022"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tournament",
+					"id": "f7184ce6-c73c-4128-adf8-85a731cc1245",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/tournament/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "31bbe05d-7c43-4ac6-ae27-74f3f74e5008"
 		}
 	]
 }
