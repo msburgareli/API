@@ -54,7 +54,7 @@ class TournamentController extends Controller
         $tournament = Tournament::findOrFail($id);
         $tournament->update($request->all());
 
-        return 'Registry updated!';
+        return response('Updated!');
     }
 
     /**
@@ -68,6 +68,6 @@ class TournamentController extends Controller
         $tournament = Tournament::findOrFail($id);
         $tournament->delete();
 
-        return 'Registry deleted!';
+        return response('Deleted!');
     }
 }
