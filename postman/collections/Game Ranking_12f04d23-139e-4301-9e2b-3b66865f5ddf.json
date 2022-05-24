@@ -9,37 +9,20 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "Get Users",
-					"id": "e54dfa83-34df-476c-bb10-5df7d2ef6bf9",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/users",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Register User",
+					"name": "Register",
 					"id": "0da1822f-f61d-4360-b809-7c3a8471856f",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -60,6 +43,73 @@
 								}
 							]
 						},
+						"url": {
+							"raw": "localhost:8000/api/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"id": "7380e1cc-83ea-4a45-a029-511362f173d7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "joao@teste.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"id": "e54dfa83-34df-476c-bb10-5df7d2ef6bf9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "localhost:8000/api/users",
 							"host": [
@@ -95,7 +145,7 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:8000/api/users/1",
+							"raw": "localhost:8000/api/users/?id={{id}}",
 							"host": [
 								"localhost"
 							],
@@ -103,80 +153,14 @@
 							"path": [
 								"api",
 								"users",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update User",
-					"id": "04a40903-92ca-456d-85c8-0d257ea2ed2a",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Pedro",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "pedro@teste.com",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "localhost:8000/api/users/1?name=Teste Id 1&email=teste@id1.com",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"1"
+								""
 							],
 							"query": [
 								{
-									"key": "name",
-									"value": "Teste Id 1"
-								},
-								{
-									"key": "email",
-									"value": "teste@id1.com"
+									"key": "id",
+									"value": "{{id}}",
+									"type": "text"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"id": "6f37f49a-e884-4f6e-8446-34b070dd2559",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/users/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"1"
 							]
 						}
 					},
@@ -352,7 +336,7 @@
 			"id": "7a8c5c8d-e9ae-4e4d-9c35-929fce49edbe"
 		},
 		{
-			"name": "Tournament",
+			"name": "Tournaments",
 			"item": [
 				{
 					"name": "Get Tournaments",
@@ -531,6 +515,199 @@
 				}
 			],
 			"id": "31bbe05d-7c43-4ac6-ae27-74f3f74e5008"
+		},
+		{
+			"name": "Scores",
+			"item": [
+				{
+					"name": "Get Tournaments",
+					"id": "cd2ce73b-5c3c-4ebe-909c-695dec9a3701",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/score",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Tournament",
+					"id": "bc941319-1536-42a9-9d51-ae1a3dbadcd8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "League of Legends Tournament 2022",
+									"type": "text"
+								},
+								{
+									"key": "game_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "started_at",
+									"value": "2022-05-22",
+									"type": "text"
+								},
+								{
+									"key": "ended_at",
+									"value": "2022-05-23",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/tournament",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Tournament",
+					"id": "f52d5e68-ced4-4575-8443-2b705e369bc4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/tournament/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tournament",
+					"id": "6c8f9919-cb91-4f9b-b175-3804c61a743a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Pedro",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "pedro@teste.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/tournament/1?name=Counter Strike 1.6 Championship 2022",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Counter Strike 1.6 Championship 2022"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tournament",
+					"id": "927979b4-f392-4957-a303-8ba0e65ff300",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/tournament/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tournament",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "ac4bbf66-a2e4-4a72-9697-751187a8635e"
+		}
+	],
+	"variable": [
+		{
+			"id": "cb20b310-04f5-4d84-9703-489c94013164",
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"id": "7232488a-ab86-46a7-91f5-d6f47c8d3fdb",
+			"key": "email",
+			"value": "joao@teste.com"
 		}
 	]
 }
