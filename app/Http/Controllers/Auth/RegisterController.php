@@ -3,18 +3,20 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\API\BaseController;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisterController extends BaseController
 {
     /**
      * Register api
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
@@ -41,6 +43,7 @@ class RegisterController extends BaseController
     /**
      * Login api
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function login(Request $request)
@@ -50,15 +53,19 @@ class RegisterController extends BaseController
             'password' => 'required|string'
         ]);
 
-
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $success['token'] = $user->createToken('MyApp')->plainTextToken;
+            $success['token'] = $user->createToken("user.{$user->id}")->plainTextToken;
             $success['name'] = $user->name;
 
-            return $this->sendResponse($success, 'User login successfully.');
+            return $this->sendResponse($success, 'User authenticated successfully.');
         } else {
             return $this->sendError('Unauthorized.', ['error' => 'Unauthorized']);
         }
+    }
+
+    public function admin_register(Request $request)
+    {
+        return Admin::create($request);
     }
 }

@@ -20,7 +20,19 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
+Route::controller(RegisterController::class)->group(function(){
+    Route::post('/register', 'register');
+    Route::post('/login', 'login');
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/admin/register', [RegisterController::class, 'admin_register']);
+});
+
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+
     // Allow user to see the list of games or a specific game using a filter
     Route::get('/game', [UserController::class, 'index']);
     Route::get('/game/{id}', [UserController::class, 'show']);
@@ -36,40 +48,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/score', [UserController::class, 'update']);
 });
 
-
-Route::controller(RegisterController::class)->group(function(){
-    Route::post('/register', 'register');
-    Route::post('/login', 'login');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{id}', [UserController::class, 'show']);
-Route::post('/users', [UserController::class, 'store']);
-
 Route::group(['middleware' => 'isAdmin'], function () {
     
     Route::post('/game', [UserController::class, 'store']);
@@ -81,7 +59,3 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::put('/tournament/{id}', [UserController::class, 'update']);
     Route::delete('/tournament/{id}', [UserController::class, 'destroy']);
 });
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
