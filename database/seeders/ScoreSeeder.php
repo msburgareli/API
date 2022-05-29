@@ -18,7 +18,6 @@ class ScoreSeed extends Seeder
     {
         DB::table('scores')->insert([
             'user_id' =>rand(1,10),
-            'game_id' =>rand(1,2),
             'tournament_id' => 1,
             'score' => rand(0,100)
         ]);

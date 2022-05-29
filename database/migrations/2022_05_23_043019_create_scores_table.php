@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('game_id');
             $table->unsignedBigInteger('tournament_id');
             $table->bigInteger('score');
             $table->timestamps();

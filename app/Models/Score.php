@@ -11,7 +11,7 @@ class Score extends Model
 
     protected $fillable = [
         'user_id',
-        'game_id',
+        'tournament_id',
         'score'
     ];
 }

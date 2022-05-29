@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Score;
 use Illuminate\Support\Facades\DB;
-use App\Helpers;
 
 class ScoreController extends Controller
 {
@@ -18,9 +17,9 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
-        return Score::create($request->all());
+        Score::create($request->all());
 
-        // return 'Registry created!';
+        return response('score created');
     }
 
     /**
@@ -35,7 +34,7 @@ class ScoreController extends Controller
         $score = Score::findOrFail($id);
         $score->update($request->all());
 
-        return response('Updated!');
+        return response('score updated');
     }
 
     /**
@@ -49,43 +48,21 @@ class ScoreController extends Controller
         $score = Score::findOrFail($id);
         $score->delete();
 
-        return response('Deleted!');
+        return response('score deleted');
     }
 
-    public function leaderboard($game_id)
+    public function playerScore(Request $request)
     {
-        if (is_sqlinjection('id', 'integer', $game_id)) {
-            return abort(404);
-        }
-
-        $leaderboard = DB::table('scores')
-            ->join('users', 'users.id', '=', 'scores.user_id')
-            ->join('games', 'games.id', '=', 'scores.game_id')
-            ->select('users.id', 'users.name', 'scores.score')
-            ->whereRaw('games.id = ?', $game_id)
-            ->get();
-
-            return $leaderboard; 
-    }
-
-    public function playerScore($game_id, $user_id)
-    {
-        if (is_sqlinjection('id', 'integer', $game_id)) {
-            return abort(404);
-        }
-
-        if (is_sqlinjection('id', 'integer', $user_id)) {
+        if (is_sqlinjection('id', 'integer', $request->tournament_id) || is_sqlinjection('id', 'integer', $request->user_id)) {
             return abort(404);
         }
 
         $score = DB::table('scores')
             ->join('users', 'users.id', '=', 'scores.user_id')
-            ->join('games', 'games.id', '=', 'scores.game_id')
             ->select('users.id', 'users.name', 'scores.score')
-            ->whereRaw('games.id = ? and users.id = ?', [$game_id, $user_id])
-            ->andWhere()
+            ->whereRaw('scores.tournament_id = ? and scores.user_id = ?', [$request->tournament_id, $request->user_id])
             ->get();
 
-            return $score;
+            return response()->json($score);
     }
 }

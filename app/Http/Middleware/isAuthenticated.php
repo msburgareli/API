@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class isAdmin
+class isAuthenticated
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,10 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->admin == 1) {
+        if(Auth::check() || Auth::guard('api')->id() ){
             return $next($request);
         }
-
-        return redirect('/');
+        
+        return redirect('/',302);
     }
 }

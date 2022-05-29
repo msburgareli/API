@@ -37,7 +37,7 @@ class RegisterController extends BaseController
         $success['token'] =  $user->createToken('api')->plainTextToken;
         $success['name'] =  $user->name;
 
-        return $this->sendResponse($success, 'User register successfully.');
+        return $this->sendResponse($success, 'user created.');
     }
 
     /**
@@ -53,12 +53,13 @@ class RegisterController extends BaseController
             'password' => 'required|string'
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        // return $this->sendResponse($request->all(), 'nop');exit;
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             $success['token'] = $user->createToken("user.{$user->id}")->plainTextToken;
             $success['name'] = $user->name;
 
-            return $this->sendResponse($success, 'User authenticated successfully.');
+            return $this->sendResponse($success, 'user authenticated.');
         } else {
             return $this->sendError('Unauthorized.', ['error' => 'Unauthorized']);
         }

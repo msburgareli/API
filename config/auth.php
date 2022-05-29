@@ -42,15 +42,9 @@ return [
             'provider' => 'users',
         ],
 
-        'admins' => [
-            'driver' => 'sanctum',
-            'provider' => 'admins',
-        ],
-
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
-            'hash' => true,
+            'provider' => 'admins'
         ],
     ],
 
@@ -77,7 +71,7 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'users' => [
+        'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],

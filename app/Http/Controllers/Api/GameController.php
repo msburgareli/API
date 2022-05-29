@@ -27,6 +27,8 @@ class GameController extends Controller
     public function store(Request $request)
     {
         Game::create($request->all());
+
+        return response('game created');
     }
 
     /**
@@ -51,6 +53,8 @@ class GameController extends Controller
     {
         $user = Game::findOrFail($id);
         $user->update($request->all());
+
+        return response('game updated');
     }
 
     /**
@@ -63,5 +67,7 @@ class GameController extends Controller
     {
         $user = Game::findOrFail($id);
         $user->delete();
+
+        return response('game deleted');
     }
 }

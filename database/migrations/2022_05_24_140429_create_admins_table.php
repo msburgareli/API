@@ -18,9 +18,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('api_token')->unique();
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::table('admins', function ($table) {
+            $table->string('api_token', 80)->after('password')
+                                ->unique()
+                                ->nullable()
+                                ->default(null);
         });
     }
 

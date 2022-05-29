@@ -18,7 +18,6 @@ class ScoreFactory extends Factory
     {
         return [
             "user_id" => rand(1,10),
-            "game_id" => rand(1,2),
             "tournament_id" => rand(1,2),
             "score" => rand(1,100)
         ];

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tournament;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class TournamentController extends Controller
 {
@@ -28,7 +30,7 @@ class TournamentController extends Controller
     {
         Tournament::create($request->all());
 
-        return 'Registry created!';
+        return 'tournament created';
     }
 
     /**
@@ -54,7 +56,7 @@ class TournamentController extends Controller
         $tournament = Tournament::findOrFail($id);
         $tournament->update($request->all());
 
-        return response('Updated!');
+        return response('tournament updated');
     }
 
     /**
@@ -68,6 +70,22 @@ class TournamentController extends Controller
         $tournament = Tournament::findOrFail($id);
         $tournament->delete();
 
-        return response('Deleted!');
+        return response('tournament deleted');
+    }
+
+    public function leaderboard($tournament_id)
+    {
+        if (is_sqlinjection('id', 'integer', $tournament_id)) {
+            return abort(404);
+        }
+
+        $leaderboard = DB::table('scores')
+            ->join('users', 'users.id', '=', 'scores.user_id')
+            ->select('users.id', 'users.name', 'scores.score')
+            ->whereRaw('scores.tournament_id = ?', $tournament_id)
+            ->orderBy('scores.score', 'DESC')
+            ->get();
+
+            return response()->json($leaderboard);
     }
 }

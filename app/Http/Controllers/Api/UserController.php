@@ -41,7 +41,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->update($request->all());
 
-        return response('Updated!');
+        return response('updated');
     }
 
     /**
@@ -55,6 +55,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return response('Deleted!');
+        return response('deleted');
     }
 }
