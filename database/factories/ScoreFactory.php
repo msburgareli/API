@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Game>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Score>
  */
-class GameFactory extends Factory
+class ScoreFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,9 @@ class GameFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Test Game'
+            "user_id" => rand(1,10),
+            "tournament_id" => rand(1,2),
+            "score" => rand(1,100)
         ];
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class TournamentController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,18 +15,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return User::all();
     }
 
     /**
@@ -35,7 +26,7 @@ class TournamentController extends Controller
      */
     public function show($id)
     {
-        //
+        return User::findOrFail($id);
     }
 
     /**
@@ -47,7 +38,10 @@ class TournamentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        return response('updated');
     }
 
     /**
@@ -58,6 +52,9 @@ class TournamentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response('deleted');
     }
 }

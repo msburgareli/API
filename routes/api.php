@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\GameController;
-use App\Http\Controllers\TournamentController;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\GameController;
+use App\Http\Controllers\Api\TournamentController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Middleware\isAuthenticated;
+use App\Http\Controllers\Api\ScoreController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +20,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/createTournament', [TournamentController::class, 'store'] );
+// Auth routes for users
+Route::controller(RegisterController::class)->group(function(){
+    Route::post('/register', 'register');
+    Route::post('/login', 'login');
+});
 
-Route::post('/registerGame', [GameController::class, 'store']);
+// User routes
+Route::middleware(isAuthenticated::class)->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
 
-Route::post('/register', [UserController::class, 'store']);
+    // Allow user to see the list of games or a specific game using a filter
+    Route::get('/game', [GameController::class, 'index']);
+    Route::get('/game/{id}', [GameController::class, 'show']);
 
-Route::post('/joinTournament', [TournamentController::class, 'update']);
+    // Allow user to see the leaderboard, the list of avaible tournaments or a specific tournament using a filter
+    Route::get('/tournament', [TournamentController::class, 'index']);
+    Route::get('/tournament/{id}/leaderboard', [TournamentController::class, 'leaderboard']);
+    Route::get('/tournament/{id}', [TournamentController::class, 'show']);
 
-Route::get('/ranking', [TournamentController::class, 'show']);
+    //Allow user to join tournaments and see the scores;
+    Route::get('/score', [ScoreController::class, 'playerScore']);
+    Route::post('/score', [ScoreController::class, 'store']);
+});
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Admin routes
+Route::middleware('auth:api')->group(function () {
+    Route::post('/admin/register', [RegisterController::class, 'admin_register']);
+
+    Route::post('/game', [GameController::class, 'store']);
+    Route::put('/game/{id}', [GameController::class, 'update']);
+    Route::delete('/game/{id}', [GameController::class, 'destroy']);
+
+    
+    Route::post('/tournament', [TournamentController::class, 'store']);
+    Route::put('/tournament/{id}', [TournamentController::class, 'update']);
+    Route::delete('/tournament/{id}', [TournamentController::class, 'destroy']);
 });

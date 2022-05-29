@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\PseudoTypes\False_;
+use App\Models\Game;
 
-class UserController extends Controller
+class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->get(['id', 'nome']);
-
-        return view('user.index', ['users' => $users]);
+        return Game::all();
     }
 
     /**
@@ -28,17 +26,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = json_decode($request);
+        Game::create($request->all());
 
-        print_r($user);exit;
-
-        $success = DB::table('users')->insert($user);
-
-        if(!$success){
-            return False;
-        }
-
-        return true;
+        return response('game created');
     }
 
     /**
@@ -49,9 +39,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = DB::table('users')->where('id', $id);
-
-        return $user;
+        return Game::findOrFail($id);
     }
 
     /**
@@ -63,15 +51,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = json_decode($request);
+        $user = Game::findOrFail($id);
+        $user->update($request->all());
 
-        $success = DB::table('users')->update($user);
-
-        if(!$success){
-            return false;
-        }
-
-        return true;
+        return response('game updated');
     }
 
     /**
@@ -82,12 +65,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $success = DB::table('users')->delete($id);
+        $user = Game::findOrFail($id);
+        $user->delete();
 
-        if(!$success){
-            return false;
-        }
-
-        return true;
+        return response('game deleted');
     }
 }
