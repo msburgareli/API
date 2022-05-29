@@ -35,16 +35,14 @@ Route::middleware(isAuthenticated::class)->group(function () {
     Route::get('/game', [GameController::class, 'index']);
     Route::get('/game/{id}', [GameController::class, 'show']);
 
-    // Allow user to see leaderboard, the list of avaible tournaments or a specific tournament using a filter
+    // Allow user to see the leaderboard, the list of avaible tournaments or a specific tournament using a filter
     Route::get('/tournament', [TournamentController::class, 'index']);
     Route::get('/tournament/{id}/leaderboard', [TournamentController::class, 'leaderboard']);
     Route::get('/tournament/{id}', [TournamentController::class, 'show']);
-    
 
-    //Allow user to join tournaments and see the scores / leaderboard
+    //Allow user to join tournaments and see the scores;
     Route::get('/score', [ScoreController::class, 'playerScore']);
     Route::post('/score', [ScoreController::class, 'store']);
-    Route::put('/score', [ScoreController::class, 'update']);
 });
 
 // Admin routes
